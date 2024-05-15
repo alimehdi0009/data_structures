@@ -325,27 +325,50 @@ int DoublyLinkedList<T>::getFrequencyOfRecursive(DoublyNode<T>* nodePtr, const T
 }
 
 template<class T>
-void DoublyLinkedList<T>::clear()
+void DoublyLinkedList<T>::clear(const bool recursivley)
 {
 	if (isEmpty())
 		return;
+	else if (recursivley)
+		return clearRecursively(head);
+	else
+		clearIteratively();
+}
+
+template<class T>
+void DoublyLinkedList<T>::clearIteratively()
+{
+	DoublyNode<T>* temp = head;
+	DoublyNode<T>* prevNode = temp;
+
+	while (temp != nullptr)
+	{
+		prevNode = temp;
+		temp = temp->getNextPtr();
+
+		deleteNode(prevNode);
+	}
+
+	temp = nullptr;
+	prevNode = nullptr;
+}
+
+template<class T>
+void DoublyLinkedList<T>::clearRecursively(DoublyNode<T>* nodePtr)
+{
+	if (nodePtr == nullptr)
+		return;
 	else
 	{
-		DoublyNode<T>* temp = head;
-		DoublyNode<T>* prevNode = temp;
+		DoublyNode<T>* prevNode = nodePtr;
+		clearRecursively(prevNode->getNextPtr());
 
-		while (temp != nullptr)
-		{
-			prevNode = temp;
-			temp = temp->getNextPtr();
+		deleteNode(prevNode);
 
-			deleteNode(prevNode);
-		}
-
-		temp = nullptr;
 		prevNode = nullptr;
 	}
 }
+
 
 template<class T>
 int DoublyLinkedList<T>::getCurrentSize() const

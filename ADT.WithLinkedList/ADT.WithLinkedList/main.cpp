@@ -58,5 +58,9 @@ int main(char *args[])
 	dll->traverse();
 
 	cout << endl;
+
+	dll->clear(false);
+
+	cout<< dll->getItemsCount();
 	return 0;
 }

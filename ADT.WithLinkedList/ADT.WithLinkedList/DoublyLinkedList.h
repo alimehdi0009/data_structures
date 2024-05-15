@@ -16,8 +16,6 @@ private:
 
 	bool isEmpty() const;
 
-	void clear();
-
 	bool deleteNode(DoublyNode<T>* targetNode);
 
 	bool deleteMiddleNode(DoublyNode<T>* targetNode);
@@ -39,6 +37,9 @@ private:
 
 	void traverseBackwardIterative() const;
 	void traverseBackwardRecursive(DoublyNode<T>* nodePtr) const;
+
+	void clearIteratively();
+	void clearRecursively(DoublyNode<T>* nodePtr);
 
 public:
 	DoublyLinkedList();
@@ -64,6 +65,9 @@ public:
 	std::vector<T>* toVector(const bool useRecursion = false) const;
 
 	void traverse(bool backward=false,bool recursively = false) const;
+
+	void clear(const bool recursively = false);
+
 };
 
 #include "DoublyLinkedList.cpp"
